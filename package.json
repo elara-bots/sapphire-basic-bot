@@ -1,0 +1,15 @@
+{
+  "name": "sapphire-basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sapphire/framework": "^3.0.0-next.30e7ffd.0",
+    "discord.js": "^13.6.0"
+  }
+}
