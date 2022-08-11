@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sapphire/framework": "3.0.0-next.38c3bc9.0",
-    "discord.js": "13.9.1"
+    "@sapphire/framework": "3.0.0-next.8ca7d7e.0",
+    "discord.js": "13.9.1",
+    "mongoose": "6.5.2"
   }
 }
