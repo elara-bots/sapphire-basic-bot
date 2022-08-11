@@ -33,14 +33,14 @@ module.exports = class CookiesCommand extends Command {
      * @param {import("discord.js").CommandInteraction} interaction 
      */
     async chatInputRun(interaction) {
-        await interaction.deferReply().catch(() => null);
+        await interaction.deferReply().catch(console.warn);
         // Defer interactions if you're using 'await' or if the command might take more than 3s
         const user = interaction.options.getUser("user"); // This gets the user from the used slash command. 
-        if (user.id === interaction.user.id) return interaction.editReply({ content: `You can't give yourself a cookie!` }).catch(() => null);
-        const data = this.handleCookie(interaction.user, user); 
+        if (user.id === interaction.user.id) return interaction.editReply({ content: `You can't give yourself a cookie!` }).catch(console.warn);
+        const data = await this.handleCookie(interaction.user, user); 
         // interaction.user: The user who ran the command
         // user: The user that was provided by the user who ran the command
-        return interaction.editReply(data).catch(() => null);
+        return interaction.editReply(data).catch(console.warn);
     }
 
     /**
@@ -50,12 +50,12 @@ module.exports = class CookiesCommand extends Command {
     async messageRun(message, args) {
         const user = await args.pick("user").catch(() => {}); // This tells sapphire to only get the 'user' from the provided content by the user
         // If the user wasn't provided then tell the user to provide a valid user.
-        if (!user) return message.reply({ content: `You didn't provide a valid user!` }).catch(() => null); 
+        if (!user) return message.reply({ content: `You didn't provide a valid user!` }).catch(console.warn);
         // If the message author and the user provided is the same then tell them they can't give themselves a cookie.
-        if (user.id === message.author.id) return message.reply({ content: `You can't give yourself a cookie!` }).catch(() => null);
+        if (user.id === message.author.id) return message.reply({ content: `You can't give yourself a cookie!` }).catch(console.warn);
         // ALWAYS HANDLE YOUR ERRORS!
         const data = await this.handleCookie(message.author, user);
-        return message.reply(data).catch(() => null);
+        return message.reply(data).catch(console.warn);
     }
 
     async handleCookie(author, user) {

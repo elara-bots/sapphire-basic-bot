@@ -33,12 +33,12 @@ module.exports = class CookiesCommand extends Command {
      * @param {import("discord.js").CommandInteraction} interaction 
      */
     async chatInputRun(interaction) {
-        await interaction.deferReply().catch(() => null);
+        await interaction.deferReply().catch(console.warn);
         // Defer interactions if you're using 'await' or if the command might take more than 3s
         const user = interaction.options.getUser("user", false) ?? interaction.user; 
         // This gets the user from the used slash command., or sets it to the slash command user.
         let data = await this.getCookies(user, interaction.user);
-        return interaction.editReply(data).catch(() => null);
+        return interaction.editReply(data).catch(console.warn);
     }
 
     /**
@@ -50,7 +50,7 @@ module.exports = class CookiesCommand extends Command {
         // If there was no user provided, it sets it to the message author.
         if (!user) user = message.author; 
         const data = await this.getCookies(user, message.author);
-        return message.reply(data).catch(() => null);
+        return message.reply(data).catch(console.warn);
     }
 
     async getCookies(user, author) {
